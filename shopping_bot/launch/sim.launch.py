@@ -182,6 +182,13 @@ def generate_launch_description():
                         'default_bt_xml_filename': default_bt_xml_filename,
                         'autostart': autostart}.items())
 
+  # Node to send a navigation goal
+  start_nav_goal_publisher_cmd = Node(
+    package='basic_mobile_robot',  # Replace with the actual package name
+    executable='send_nav_goal.py',
+    name='nav_goal_publisher',
+    output='screen')
+
   # Create the launch description and populate
   ld = LaunchDescription()
 
@@ -209,5 +216,5 @@ def generate_launch_description():
   ld.add_action(start_robot_state_publisher_cmd)
   ld.add_action(start_rviz_cmd)
   ld.add_action(start_ros2_navigation_cmd)
-
+  ld.add_action(start_nav_goal_publisher_cmd)  # Change Nav2 Goal
   return ld
